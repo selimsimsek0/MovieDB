@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+body {
+    font-size: 12px;
+    line-height: 1.3;
+    font-family: Arial, Helvetica, Sans-Serif;
+    color: #ccc;
+    background-color: white;
+    /* background: url('images/body-bg.gif'); */
+}
+
+
+.box {
+    width: auto;
+    /* border-bottom: 1px dashed #413e3e; */
+    /* padding-bottom: 21px; */
+    margin: 20px;
+}
+
+    .box .head {
+        width: auto;
+        padding-top: 14px;
+        padding-bottom: 11px;
+    }
+
+    .box .movie {
+        width: 179px;
+        float: left;
+        margin: 12px;
+        padding: 2px;
+        /* padding-right:12px; */
+    }
+
+.movie-image {
+    float: left;
+    width: 179px;
+    height: 252px;
+    position: relative;
+}
+
+    .movie-image img {
+        width: 179px;
+        height: 252px;
+    }
+
+    .movie-image a {
+        float: left;
+        display: inline;
+        width: 179px;
+        height: 252px;
+        position: relative;
+        z-index: 2;
+    }
+
+.showdetail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 179px;
+    height: 252px;
+    display: block;
+    z-index: 5;
+    cursor: pointer;
+    display: none;
+}
+
+    .showdetail .moviebackground {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 179px;
+        height: 252px;
+        background-color: black;
+        opacity: 0.3;
+    }
+
+.movie span.name {
+    position: absolute;
+    font-weight: bold;
+    color: #fff;
+    font-size: 18px;
+    width: 179px;
+    text-align: center;
+    padding-top: 180px;
+    display: block;
+    opacity: 1;
+}
+
+.rating {
+    float: left;
+    width: 179px;
+    height: 40px;
+    background-color: black;
+}
+
+
+    .rating div {
+        color: #fff;
+        font-weight: bold;
+        font-size: 14px;
+        width:175px;
+        height: 40px;
+       line-height: 40px;
+        text-align: center;
+    }
+
+.pagination {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 10px;
+    margin: 10px;
+    width: 100%;
+}
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .pagination .notenabled {
+        color: #999999;
+    }
+
+    .pagination p {
+        color: black;
+        float: left;
+        transform: translate(0px, 5px);
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 15px;
+        letter-spacing: 4px;
+    }
+
+
+    .pagination a.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .pagination a:hover:not(.active) {
+        background-color: #ddd;
+    }

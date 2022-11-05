@@ -5,7 +5,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace MovieDB.Business.Providers.MovieDBApi.Models
+namespace MovieDB.Business.Providers.MovieDBApi
 {
     public class MovieDbMovieService
     {
