@@ -102,9 +102,9 @@ body {
         color: #fff;
         font-weight: bold;
         font-size: 14px;
-        width:175px;
+        width: 175px;
         height: 40px;
-       line-height: 40px;
+        line-height: 40px;
         text-align: center;
     }
 
@@ -146,4 +146,48 @@ body {
 
     .pagination a:hover:not(.active) {
         background-color: #ddd;
+    }
+
+.detailbox {
+    display: flex;
+    background-color: #413e3e;
+    padding: 5px;
+    margin: 5px;
+    min-width: 800px;
+}
+
+    .detailbox img {
+        width: 270px;
+        height: 400px;
+        margin: 5px;
+    }
+
+    .detailbox img {
+        padding: 10px;
+        border-radius: 8%;
+    }
+
+    .detailbox h2 {
+        color: #eee;
+        margin-bottom: 2px;
+    }
+
+        .detailbox h2 span {
+            color: #aaa;
+        }
+
+    .detailbox p {
+        margin: 0;
+        color: white;
+    }
+
+    .detailbox h4 {
+        color: #999;
+        margin-top:10px;
+    }
+
+    .detailbox h3 {
+        color: white;
+        margin: 0;
+        margin-bottom: 10px;
     }

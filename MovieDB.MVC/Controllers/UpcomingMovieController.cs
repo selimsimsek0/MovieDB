@@ -7,7 +7,7 @@ namespace MovieDB.MVC.Controllers
 {
     public class UpcomingMovieController : Controller
     {
-
+       
         public IActionResult Index(int page=1)
         {
             if (page < 1) page = 1;
