@@ -11,10 +11,11 @@ namespace MovieDB.MVC.Controllers
     {
         public IActionResult Index(int id)
         {
-            MovieDbMovieService movvieService = new MovieDbMovieService();
-            MovieDetail movieDetail = movvieService.GetMovieDetail(new MovieDetailRequest
+            string language = "tr-TR";
+            MovieDbMovieService movieService = new MovieDbMovieService();
+            MovieDetail movieDetail = movieService.GetMovieDetail(new MovieDetailRequest
             {
-                Language = "tr-TR",
+                Language = language,
                 MovieId = id
             }).Result;
 
@@ -47,7 +48,7 @@ namespace MovieDB.MVC.Controllers
                 movieYear = movieDateTime.Year.ToString();
             }
 
-            MovieDetailViewModel model = new MovieDetailViewModel
+            MovieDetailViewModel detailModel = new MovieDetailViewModel
             {
                 Genres = genres,
                 MovieRunTime = $"{movieHour}h {movieMinute}m",
@@ -60,7 +61,15 @@ namespace MovieDB.MVC.Controllers
                 ImagePath=movieDetail.poster_path
             };
 
-            return View(model);
+            SearchResponse<MovieHeader> similarList = movieService.GetMovieSimilar(new MovieSimilarRequest
+            {
+                Language = language,
+                MovieId = id,
+                Page = 1
+            }).Result;
+
+            var tupleModel = (detailModel, similarList);
+            return View(tupleModel);
         }
     }
 }

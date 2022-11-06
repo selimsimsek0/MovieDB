@@ -1,21 +1,54 @@
-﻿@model MovieDB.MVC.Models.MovieDetailViewModel;
+﻿@model (MovieDB.MVC.Models.MovieDetailViewModel Detail, MovieDB.Business.Providers.MovieDBApi.Models.Response.SearchResponse<MovieDB.Business.Providers.MovieDBApi.Models.Response.MovieHeader> Similars);
 
 <div class="detailbox">
-    <img src="https://image.tmdb.org/t/p/w500@(Model.ImagePath)">
+    <img src="https://image.tmdb.org/t/p/w500@(Model.Detail.ImagePath)">
     <div>
         <h2>
-            @Model.MovieTitle
-            <span>(@Model.ReleaseYear)</span>
+            @Model.Detail.MovieTitle
+            <span>(@Model.Detail.ReleaseYear)</span>
         </h2>
         <p>
-           
-            @Model.RelaseDate (@Model.ProductionCountries) | @Model.Genres | @Model.MovieRunTime
+
+            @Model.Detail.RelaseDate (@Model.Detail.ProductionCountries) | @Model.Detail.Genres | @Model.Detail.MovieRunTime
 
         </p>
-        <h4>@Model.TagLine</h4>
+        <h4>@Model.Detail.TagLine</h4>
         <h3>Overview</h3>
         <p>
-            @Model.OverView
+            @Model.Detail.OverView
         </p>
     </div>
 </div>
+<div class="similarheader">Similars</div>
+<div class="similarscroll">
+
+    @foreach (var movieItem in Model.Similars.results)
+    {
+    <div class="similarmovie">
+        <div class="movie">
+            <div class=" movie-image">
+                <a asp-controller="MovieDetail" asp-action="Index" asp-route-id="@movieItem.id">
+                    <span class="showdetail">
+                        <span class="moviebackground"></span>
+                        <span class="name">Detail </span>
+                    </span>
+
+                    <img src="https://image.tmdb.org/t/p/w500@(movieItem.poster_path)" alt="" />
+                    <div class="c100 p@((int)movieItem.vote_average*10) small">
+                        <span>@(movieItem.vote_average > 0 ? ((int)movieItem.vote_average * 10).ToString()+"%" : "NR")</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+        <div class="movietitle">
+            <div>@movieItem.original_title</div>
+        </div>
+    </div>
+            }
+       
+    </div>
