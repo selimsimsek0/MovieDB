@@ -51,7 +51,7 @@ namespace MovieDB.MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Upcomingmovie}/{action=Index}/{id?}");
             });
         }
     }

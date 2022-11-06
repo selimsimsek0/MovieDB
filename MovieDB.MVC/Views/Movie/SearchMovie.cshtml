@@ -1,0 +1,90 @@
+﻿@model (MovieDB.Business.Providers.MovieDBApi.Models.Response.SearchResponse<MovieDB.Business.Providers.MovieDBApi.Models.Response.MovieHeader> Search, string SearchKey)
+
+
+<div class="pagination">
+    @if (Model.Search.page > 1)
+    {
+        <a asp-controller="Movie" asp-action="SearchMovie" asp-route-moviename="@Model.SearchKey" asp-route-page="@(Model.Search.page-1)"> &laquo;</a>
+    }
+    else
+    {
+        <a class="notenabled">&laquo;</a>
+    }
+    @if (Model.Search.page > 4 && Model.Search.total_pages > 4)
+    {
+        <a asp-controller="Movie" asp-action="SearchMovie" asp-route-moviename="@Model.SearchKey" asp-route-page="1">1</a>
+        <p>...</p>
+    }
+
+    @{
+        int say = 0;
+        int startIndex = 1;
+        if (Model.Search.page - 1 > 0) startIndex = Model.Search.page - 1;
+        if (Model.Search.page - 2 > 0) startIndex = Model.Search.page - 2;
+        }
+    @while ( startIndex <= Model.Search.total_pages)
+    {
+
+        say++;
+        if (Model.Search.page == startIndex)
+        {
+            <a class="active" asp-controller="Movie" asp-action="SearchMovie" asp-route-moviename="@Model.SearchKey" asp-route-page="@startIndex">@startIndex</a>
+        }
+        else
+        {
+            <a asp-controller="Movie" asp-action="SearchMovie" asp-route-moviename="@Model.SearchKey" asp-route-page="@startIndex">@startIndex</a>
+        }
+        if (say > 5 && Model.Search.total_pages - say > 2)
+        {
+            <p>...</p>
+            <a asp-controller="Movie" asp-action="SearchMovie" asp-route-moviename="@Model.SearchKey" asp-route-page="@Model.Search.total_pages">@Model.Search.total_pages</a>
+            break;
+        }
+
+        startIndex++;
+    }
+    @if (Model.Search.total_pages > Model.Search.page)
+    {
+        <a asp-controller="Movie" asp-action="SearchMovie" asp-route-moviename="@Model.SearchKey" asp-route-page="@(Model.Search.page+1)">&raquo;</a>
+    }
+    else
+    {
+        <a class="notenabled">&raquo;</a>
+    }
+</div>
+<div>
+    <h4 style="color:black">
+        Key:@Model.SearchKey
+    </h4>
+    <h5>
+        Total Result: @Model.Search.total_results
+    </h5>
+</div>
+
+<div class="box">
+    @foreach (var movieItem in Model.Search.results)
+    {
+        <div class="movie">
+            <div class=" movie-image">
+                <a asp-controller="MovieDetail" asp-action="Index" asp-route-id="@movieItem.id">
+                    <span class="showdetail">
+                        <span class="moviebackground"></span>
+                        <span class="name">Detail </span>
+                    </span>
+
+                    <img src="https://image.tmdb.org/t/p/w500@(movieItem.poster_path)" alt="" />
+                    <div class="c100 p@((int)movieItem.vote_average*10) small">
+                        <span>@(movieItem.vote_average > 0 ? ((int)movieItem.vote_average * 10).ToString()+"%" : "NR")</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="movietitle">
+                <div>@movieItem.original_title</div>
+            </div>
+        </div>
+    }
+</div>

@@ -6,33 +6,42 @@
 <div class="pagination">
     @if (Model.page > 1)
     {
-        @*<a asp-controller="UpcomingMovie" asp-action="Index" asp-route-page="@(Model.page-1)"> &laquo;</a>*@
-        <a href="/UpcomingMovie/getpage/2"> &laquo;</a>
+        <a asp-controller="UpcomingMovie" asp-action="Index" asp-route-page="@(Model.page-1)">&laquo;</a>
     }
     else
     {
-
-
         <a class="notenabled">&laquo;</a>
     }
-    @{int say = 0;}
-    @for (int i = 1; i <= Model.total_pages; i++)
+    @if (Model.page > 4 && Model.total_pages > 4)
+    {
+        <a asp-controller="UpcomingMovie" asp-action="Index" asp-route-page="1">1</a>
+        <p>...</p>
+    }
+
+    @{
+        int say = 0;
+        int startIndex = 1;
+        if (Model.page - 1 > 0) startIndex = Model.page - 1;
+        if (Model.page - 2 > 0) startIndex = Model.page - 2;
+    }
+    @while (startIndex <= Model.total_pages)
     {
         say++;
-        if (Model.page == i)
+        if (Model.page == startIndex)
         {
-            <a class="active" asp-controller="UpcomingMovie" asp-action="Index" asp-route-page="@i"> @i</a>
+            <a class="active" asp-controller="UpcomingMovie" asp-action="Index" asp-route-page="@startIndex">@startIndex</a>
         }
         else
         {
-            <a asp-controller="UpcomingMovie" asp-action="Index" asp-route-page="@i"> @i</a>
+            <a asp-controller="UpcomingMovie" asp-action="Index" asp-route-page="@startIndex">@startIndex</a>
         }
         if (say > 5 && Model.total_pages - say > 2)
         {
             <p>...</p>
-            <a asp-controller="UpcomingMovie" asp-action="Index" asp-route-page="@Model.total_pages"> @Model.total_pages</a>
+            <a asp-controller="UpcomingMovie" asp-action="Index" asp-route-page="@Model.total_pages">@Model.total_pages</a>
             break;
         }
+        startIndex++;
     }
     @if (Model.total_pages > Model.page)
     {

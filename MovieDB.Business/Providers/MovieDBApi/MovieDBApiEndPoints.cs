@@ -4,7 +4,7 @@ namespace MovieDB.Business.Providers.MovieDBApi
 {
     public static class MovieDBApiEndPoints
     {
-        private static string SearchMovieBase => "https://api.themoviedb.org/3/search/movie/";
+        private static string SearchMovieBase => "http://api.themoviedb.org/3/search/movie/";
         public static string Movie => "https://api.themoviedb.org/3/movie";
 
         public static string SearchMovie(SearchMovieRequest request)
