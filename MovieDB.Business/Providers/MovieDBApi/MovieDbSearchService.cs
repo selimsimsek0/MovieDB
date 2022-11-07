@@ -19,12 +19,19 @@ namespace MovieDB.Business.Providers.MovieDBApi
 
         public async Task<SearchResponse<MovieHeader>> GetSearchMovieAsync(SearchMovieRequest request)
         {
-            HttpClient client = GetHttpClient();
-            Uri uri = new Uri(MovieDBApiEndPoints.SearchMovie(request));
-            string responseString = await client.GetStringAsync(uri);
-            SearchResponse<MovieHeader> response = JsonConvert.DeserializeObject<SearchResponse<MovieHeader>>(responseString);
-
-            return response;
+            SearchResponse<MovieHeader> searchResponse = new SearchResponse<MovieHeader>();
+            try
+            {
+                HttpClient client = GetHttpClient();
+                Uri uri = new Uri(MovieDBApiEndPoints.SearchMovie(request));
+                string responseString = await client.GetStringAsync(uri);
+                SearchResponse<MovieHeader> response = JsonConvert.DeserializeObject<SearchResponse<MovieHeader>>(responseString);
+                searchResponse = response;
+            }
+            catch
+            {
+            }
+            return searchResponse;
         }
     }
 }

@@ -19,29 +19,57 @@ namespace MovieDB.Business.Providers.MovieDBApi
 
         public async Task<MovieDetail> GetMovieDetail(MovieDetailRequest request)
         {
-            HttpClient client = GetHttpClient();
-            Uri uri = new Uri(MovieDBApiEndPoints.MovieDetail(request));
-            string responseString = await client.GetStringAsync(uri);
-            MovieDetail response = JsonConvert.DeserializeObject<MovieDetail>(responseString);
-            return response;
+            MovieDetail detail = new MovieDetail();
+            try
+            {
+                HttpClient client = GetHttpClient();
+                Uri uri = new Uri(MovieDBApiEndPoints.MovieDetail(request));
+                string responseString = await client.GetStringAsync(uri);
+                MovieDetail response = JsonConvert.DeserializeObject<MovieDetail>(responseString);
+                detail = response;
+
+            }
+            catch
+            {
+            }
+
+            return detail;
+
         }
 
         public async Task<SearchResponse<MovieHeader>> GetMovieSimilar(MovieSimilarRequest request)
         {
-            HttpClient client = GetHttpClient();
-            Uri uri = new Uri(MovieDBApiEndPoints.MovieSimilar(request));
-            string responseString = await client.GetStringAsync(uri);
-            SearchResponse<MovieHeader> response = JsonConvert.DeserializeObject<SearchResponse<MovieHeader>>(responseString);
-            return response;
+            SearchResponse<MovieHeader> searchResponse = new SearchResponse<MovieHeader>();
+            try
+            {
+                HttpClient client = GetHttpClient();
+                Uri uri = new Uri(MovieDBApiEndPoints.MovieSimilar(request));
+                string responseString = await client.GetStringAsync(uri);
+                SearchResponse<MovieHeader> response = JsonConvert.DeserializeObject<SearchResponse<MovieHeader>>(responseString);
+                searchResponse = response;
+            }
+            catch
+            {
+            }
+            return searchResponse;
         }
 
         public async Task<MovieUpComingResponse> GetMovieUpComing(MovieUpComingRequest request)
         {
-            HttpClient client = GetHttpClient();
-            Uri uri = new Uri(MovieDBApiEndPoints.MovieUpcoming(request));
-            string responseString = await client.GetStringAsync(uri);
-            MovieUpComingResponse response = JsonConvert.DeserializeObject<MovieUpComingResponse>(responseString);
-            return response;
+            MovieUpComingResponse movieUpComingResponse = new();
+            try
+            {
+                HttpClient client = GetHttpClient();
+                Uri uri = new Uri(MovieDBApiEndPoints.MovieUpcoming(request));
+                string responseString = await client.GetStringAsync(uri);
+                MovieUpComingResponse response = JsonConvert.DeserializeObject<MovieUpComingResponse>(responseString);
+                movieUpComingResponse = response;
+            }
+            catch
+            {
+            }
+            return movieUpComingResponse;
+
         }
 
     }
