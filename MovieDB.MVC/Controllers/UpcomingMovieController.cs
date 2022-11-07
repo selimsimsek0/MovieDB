@@ -17,7 +17,7 @@ namespace MovieDB.MVC.Controllers
 
                 Language = "tr-TR",
                 Page = page,
-                Region = "US"
+                Region = "TR"
             }).Result;
             
             return View(response);
