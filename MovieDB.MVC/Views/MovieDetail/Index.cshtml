@@ -7,6 +7,9 @@
             @Model.Detail.MovieTitle
             <span>(@Model.Detail.ReleaseYear)</span>
         </h2>
+        <h4>
+            Original Name: @Model.Detail.MovieOriginalTitle
+        </h4>
         <p>
 
             @Model.Detail.RelaseDate (@Model.Detail.ProductionCountries) | @Model.Detail.Genres | @Model.Detail.MovieRunTime
@@ -46,7 +49,7 @@
 
         </div>
         <div class="movietitle">
-            <div>@movieItem.original_title</div>
+            <div>@movieItem.title</div>
         </div>
     </div>
             }

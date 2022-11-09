@@ -2,6 +2,7 @@
 using MovieDB.Business.Providers.MovieDBApi.Models.Response;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -19,7 +20,14 @@ namespace MovieDB.Business.Providers.MovieDBApi
 
         public async Task<SearchResponse<MovieHeader>> GetSearchMovieAsync(SearchMovieRequest request)
         {
+
             SearchResponse<MovieHeader> searchResponse = new SearchResponse<MovieHeader>();
+         
+            if (string.IsNullOrWhiteSpace(request.Query))
+            {
+                searchResponse.results = new List<MovieHeader>();
+                return searchResponse;
+            }
             try
             {
                 HttpClient client = GetHttpClient();
@@ -30,6 +38,8 @@ namespace MovieDB.Business.Providers.MovieDBApi
             }
             catch
             {
+                searchResponse.results = new List<MovieHeader>();
+                return searchResponse;
             }
             return searchResponse;
         }

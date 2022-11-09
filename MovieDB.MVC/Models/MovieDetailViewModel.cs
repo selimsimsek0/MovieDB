@@ -3,6 +3,7 @@
     public class MovieDetailViewModel
     {
         public string MovieTitle { get; set; }
+        public string MovieOriginalTitle { get; set; }
         public string ReleaseYear { get; set; }
         public string RelaseDate { get; set; }
         public string ProductionCountries { get; set; }

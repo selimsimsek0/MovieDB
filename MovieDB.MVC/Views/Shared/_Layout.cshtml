@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - MovieDB</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body>
     <header>
@@ -22,26 +23,37 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="UpcomingMovie" asp-action="Index">Upcoming</a>
                         </li>
                     </ul>
-                    <form autocomplete="on" class="form-inline my-2 my-lg-0" asp-controller="movie" asp-action="searchmovie" method="get">
-                        <input id="searchinput" class="form-control mr-sm-2" type="search" value="@ViewData["MovieName"]" placeholder="Search Movie" aria-label="Search" name="moviename">
+                    <form id="headersearchform" autocomplete="off" class="form-inline my-2 my-lg-0" asp-controller="movie" asp-action="searchmovie" method="get">
+                        <div class="autocomplete">
+                            <input id="headersearchinput" class="form-control mr-sm-2" type="search" value="@ViewData["MovieName"]" placeholder="Search Movie" aria-label="Search" name="moviename">
+                        </div>
                     </form>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/searchautocomplete.js"></script>
 
     <link rel="stylesheet" href="~/css/moviestyle.css" type="text/css" media="all" />
     <link rel="stylesheet" href="~/css/percentcircle.css" />
+    <link rel="stylesheet" href="~/css/searchautocomplete.css" />
 
     <script type="text/javascript" src="~/js/jquery-moviedetail.js"></script>
+
+    <script>
+        autocomplete(document.getElementById("headersearchform"), document.getElementById("headersearchinput"));
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

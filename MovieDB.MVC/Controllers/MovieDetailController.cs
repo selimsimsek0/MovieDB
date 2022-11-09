@@ -52,7 +52,8 @@ namespace MovieDB.MVC.Controllers
             {
                 Genres = genres,
                 MovieRunTime = $"{movieHour}h {movieMinute}m",
-                MovieTitle = movieDetail.original_title,
+                MovieTitle = movieDetail.title,
+                MovieOriginalTitle = movieDetail.original_title,
                 OverView = movieDetail.overview,
                 ProductionCountries = productionCountries,
                 RelaseDate = movieDetail.release_date,
